@@ -290,27 +290,27 @@ static LeftMenuView *menuView = nil;
     return  self ;
 }
 
-- (void)layoutSubviews{
-    
-    CGRect rect = CGRectMake(20, 44, 88, 88);
-    _headButton.frame = rect;
-    _headImage.frame = CGRectMake(0, 0, 88, 88);
-    [_headButton addSubview:_headImage];
-    CGFloat marginX = 0;
-    _usrAccountLabel.frame = CGRectMake(115, CGRectGetMaxY(_headButton.frame) + marginX-80, self.width/2, 22);
-    _VersionLabel.frame = CGRectMake(115, CGRectGetMaxY(_headButton.frame) + marginX-48, self.width/2, 44);
-    _rightIconLabel.frame = CGRectMake(self.width-32, CGRectGetMaxY(_headButton.frame) /2+10, 22, 22);
-    
-    _lineView.frame = CGRectMake(marginX, CGRectGetMaxY(_headButton.frame)+30, self.width - marginX * 2, 0.5);
-    _topBlackView.frame = CGRectMake(0, 0, self.width, CGRectGetMaxY(_lineView.frame));
-    CGFloat addBtnW = 30;
-    _addButton.frame = CGRectMake(marginX, ScreenWidth - 25 - addBtnW, self.width - marginX * 2, addBtnW);
-    [_addButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, addBtnW)];
-    [_addButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
-    CGFloat tablView_top = CGRectGetMaxY(_lineView.frame) + marginX;
-    CGFloat tableView_Bottom = CGRectGetMaxY(_addButton.frame)+42;
-    _menuTableView.frame = CGRectMake(marginX, tablView_top, self.width - marginX * 2, tableView_Bottom - tablView_top);
-}
+//- (void)layoutSubviews{
+//    
+//    CGRect rect = CGRectMake(20, 44, 88, 88);
+//    _headButton.frame = rect;
+//    _headImage.frame = CGRectMake(0, 0, 88, 88);
+//    [_headButton addSubview:_headImage];
+//    CGFloat marginX = 0;
+//    _usrAccountLabel.frame = CGRectMake(115, CGRectGetMaxY(_headButton.frame) + marginX-80, self.width/2, 22);
+//    _VersionLabel.frame = CGRectMake(115, CGRectGetMaxY(_headButton.frame) + marginX-48, self.width/2, 44);
+//    _rightIconLabel.frame = CGRectMake(self.width-32, CGRectGetMaxY(_headButton.frame) /2+10, 22, 22);
+//    
+//    _lineView.frame = CGRectMake(marginX, CGRectGetMaxY(_headButton.frame)+30, self.width - marginX * 2, 0.5);
+//    _topBlackView.frame = CGRectMake(0, 0, self.width, CGRectGetMaxY(_lineView.frame));
+//    CGFloat addBtnW = 30;
+//    _addButton.frame = CGRectMake(marginX, ScreenWidth - 25 - addBtnW, self.width - marginX * 2, addBtnW);
+//    [_addButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, addBtnW)];
+//    [_addButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
+//    CGFloat tablView_top = CGRectGetMaxY(_lineView.frame) + marginX;
+//    CGFloat tableView_Bottom = CGRectGetMaxY(_addButton.frame)+42;
+//    _menuTableView.frame = CGRectMake(marginX, tablView_top, self.width - marginX * 2, tableView_Bottom - tablView_top);
+//}
 
 - (void)UpdateUserData:(NSNotification *)notify{
     
