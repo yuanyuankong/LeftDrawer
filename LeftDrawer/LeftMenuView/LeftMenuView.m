@@ -16,7 +16,7 @@
 @property (nonatomic, assign) CGFloat width;
 //自定义视图
 @property (nonatomic, strong) UIView *topBlackView;
-@property (nonatomic, strong) UIButton *headButton;
+//@property (nonatomic, strong) UIButton *headButton;
 @property (nonatomic, strong) UIImageView *headImage;
 @property (nonatomic, strong) UILabel *usrAccountLabel;
 @property (nonatomic, strong) UILabel *VersionLabel;
@@ -206,40 +206,40 @@ static LeftMenuView *menuView = nil;
 -(instancetype)initWithFrame:(CGRect)frame{
     LOG_METHOD;
     if (self=[super initWithFrame:frame]) {
-        
+        self.width = frame.size.width;
         self.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
         //背景view
         _topBlackView = [[UIView alloc] init];
-       // _topBlackView.image = [UIImage imageNamed:@"leftmenu_topbg.jpg"];
+        //_topBlackView.image = [UIImage imageNamed:@"leftmenu_topbg.jpg"];
         _topBlackView.backgroundColor = [UIColor whiteColor];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeHeaderImage)];
         [_topBlackView addGestureRecognizer:tap];
         [self addSubview:_topBlackView];
-        
         //头像Button
-        _headButton = [[UIButton alloc]init];
-        _headButton.userInteractionEnabled = NO;
+//        _headButton = [[UIButton alloc]init];
+//        _headButton.userInteractionEnabled = NO;
        // [_headButton addTarget:self action:@selector(changeHeaderImage) forControlEvents:UIControlEventTouchUpInside];
 //        _headImage = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"leftmenu_topbg.jpg"]];
 //        NSString *str = [UICKeyChainStore stringForKey:@"1kf_avatar" service:ServiceKey];
 //        [_headImage sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"leftmenu_topbg.jpg"]];
+        self.headImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 44, 88, 88)];
         _headImage.layer.cornerRadius = 44;
         _headImage.layer.masksToBounds = YES;
         _headImage.layer.borderWidth = 1;
         _headImage.layer.borderColor = [[UIColor colorWithRed:0.6667 green:0.6667 blue:0.6667 alpha:1.0] CGColor];
-        [self addSubview:_headButton];
+        [_headImage setImage:[UIImage imageNamed:@"dog.jpg"]];
+        [self addSubview:_headImage];
         
         //账户名称
-        _usrAccountLabel = [[UILabel alloc]init];
+        _usrAccountLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, CGRectGetMaxY(_headImage.frame) - 80, self.width/2, 22)];
         _usrAccountLabel.text = @"昵称";
         _usrAccountLabel.textColor = [UIColor blackColor];
         _usrAccountLabel.font = [UIFont systemFontOfSize:15];
         _usrAccountLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:_usrAccountLabel];
         
-        
         //版本
-        _VersionLabel = [[UILabel alloc]init];
+        _VersionLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, CGRectGetMaxY(_headImage.frame) - 48, self.width/2, 44)];
         _VersionLabel.text = [NSString stringWithFormat:@"1.0.0"];
         _VersionLabel.textColor = [UIColor blackColor];
         _VersionLabel.font = [UIFont systemFontOfSize:15];
@@ -255,35 +255,23 @@ static LeftMenuView *menuView = nil;
 ////        _rightIconLabel.font = [UIFont systemFontOfSize:22];
 //        _rightIconLabel.textAlignment = NSTextAlignmentRight;
 //        [self addSubview:_rightIconLabel];
-//        
-        
         
         //线条
-        _lineView = [[UIView alloc]init];
+        _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_headImage.frame)+30, self.width, 0.5)];
         _lineView.backgroundColor = RGBCOLOR(61, 60, 68);
         [self addSubview:_lineView];
-        //添加“+”按钮
-        _addButton = [[UIButton alloc]init];
-        [_addButton setImage:[UIImage imageNamed:@"leftmenu_add_nor"] forState:UIControlStateNormal];
-        [_addButton setImage:[UIImage imageNamed:@"leftmenu_add_press"] forState:UIControlStateHighlighted];
-        [_addButton setTitle:@"Add Button" forState:UIControlStateNormal];
-        [_addButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
-        [_addButton setTitleColor:RGBCOLOR(187, 190, 199) forState:UIControlStateNormal];
-        [_addButton addTarget:self action:@selector(AddAction) forControlEvents:UIControlEventTouchUpInside];
-//        [self addSubview:_addButton];
         //tableview
-        _menuTableView = [[LeftMenuTableView alloc]init];
+        CGFloat marginX = 0.f;
+        CGFloat tablView_top = CGRectGetMaxY(_lineView.frame);
+        _menuTableView = [[LeftMenuTableView alloc] initWithFrame:CGRectMake(marginX, tablView_top, self.width - marginX * 2, ScreenHeight - tablView_top)];
         _menuTableView.backgroundColor = [UIColor whiteColor];
         __block LeftMenuView *blockSelf = self;
         _menuTableView.menuActionBlock = ^(NSMutableDictionary *name){
-            
             if (blockSelf.menuViewDelegate) {
                 [blockSelf.menuViewDelegate LeftMenuViewActionIndex:name];
             }
         };
         [self addSubview:_menuTableView];
-        
-        
     }
     //注册通知观察者（接受通知，将记录跳转界面的值从主控制器传过来）
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(UpdateUserData:) name:@"UpdateUserData" object:nil];

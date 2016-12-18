@@ -33,19 +33,8 @@
         self.scrollEnabled = YES;
         self.layoutMargins = UIEdgeInsetsZero;
         self.separatorInset = UIEdgeInsetsZero;
-    
-//        self.style = UITableViewStylePlain;
-        
-//        self.separatorColor = [UIColor clearColor];
-//        self.separatorStyle= UITableViewCellSeparatorStyleNone;
-//
-//        self.dataSourceArr = @[@[@"cell_row_00",@"cell_row_01"], @[@"cell_row_10",@"cell_row_11",@"cell_row_12",@"cell_row_13"], @[@"cell_row_20"]];
-//        self.imageSourceArr= @[@[@"image1", @"image2"], @[@"image3", @"image4", @"image5", @"image6"], @[@"image7"]];
-//        
         self.classSourceArr= @[@"所有订单",@"客户管理",@"活动二维码",@"当面推",@"请假",@"消息",@"评价",@"版本检测",@"帮助",@"退出登录"];
         self.dataSourceArr= @[@"AllOrderlistViewController",@"CustomersViewController",@"ActivityCodeViewController",@"FaceToViewController",@"AskForLeaveViewController",@"MessagesViewController",@"CommentListViewController",@"VerSionCheck",@"HelpCenterViewController",@"Logout"];
-        
-        
         UIView *footerView = [[UIView alloc] init];
         footerView.backgroundColor = [UIColor whiteColor];
         self.tableFooterView = footerView;
@@ -60,35 +49,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-//    static NSString *cellID = @"menu";
-//    MenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-//    if (!cell) {
-//        cell = [[MenuTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-//    }
-//    cell.backgroundColor = [UIColor whiteColor];
-//    cell.textLabel.text = _dataSourceArr[indexPath.section][indexPath.row];
-//    cell.textLabel.textColor = [UIColor blackColor];
-//    cell.textLabel.highlightedTextColor = RGBCOLOR(9, 235, 255);
-//    cell.textLabel.font = [UIFont systemFontOfSize:15];
-//    NSString *norImage = [NSString stringWithFormat:@"%@", _imageSourceArr[indexPath.section][indexPath.row]];
-////    NSString *norImage = [NSString stringWithFormat:@"%@_nor", _imageSourceArr[indexPath.section][indexPath.row]];
-////    NSString *selImage = [NSString stringWithFormat:@"%@_press", _imageSourceArr[indexPath.section][indexPath.row]];
-//    cell.imageView.image = [UIImage imageNamed:norImage];
-////    cell.imageView.highlightedImage = [UIImage imageNamed:selImage];
-//    cell.selectedBackgroundView = [[UIView alloc] init];
-//    return cell;
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
-        
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
     cell.textLabel.text = [_classSourceArr objectAtIndex:indexPath.row];
-    
-    
     if (indexPath.row ==5) {
         //新建小红点
         if (badgeView) {
@@ -106,8 +73,6 @@
         badgeView.frame = CGRectMake(x, y, 8, 8);//圆形大小为10
         [cell addSubview:badgeView];
         badgeView.hidden = NO;
-
-        
     }
     
     if (indexPath.row ==7) {
@@ -126,13 +91,9 @@
         CGFloat y = ceilf(0.1 * tabFrame.size.height+18);
         badgeView1.frame = CGRectMake(x, y, 8, 8);//圆形大小为10
         [cell addSubview:badgeView1];
-        
         badgeView.hidden = NO;
-        
     }
-    
     return cell;
-    
 }
 
 #pragma mark - UITableViewDelegate
